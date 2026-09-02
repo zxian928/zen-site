@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zen — Full-Stack Developer</title>
+  <meta name="description" content="Zen — full-stack developer. Building web apps end to end." />
+  <meta property="og:title" content="Zen — Full-Stack Developer" />
+  <meta property="og:description" content="Full-stack developer building web apps end to end." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◐</text></svg>" />
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --bg-soft: #14171c;
+      --border: #232830;
+      --text: #e6e8eb;
+      --muted: #9aa4b2;
+      --accent: #6ee7b7;
+      --accent-2: #38bdf8;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafafa;
+        --bg-soft: #ffffff;
+        --border: #e4e7eb;
+        --text: #14171c;
+        --muted: #5b6572;
+        --accent: #059669;
+        --accent-2: #0284c7;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* backdrop glow */
+    .glow {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(600px 400px at 15% -5%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+        radial-gradient(700px 500px at 100% 10%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 70%);
+    }
+
+    /* nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .logo { font-weight: 700; letter-spacing: .5px; display: flex; align-items: center; gap: 8px; }
+    .logo .dot { color: var(--accent); }
+    nav .links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    nav .links a:hover { color: var(--text); }
+
+    /* hero */
+    header { padding: 90px 0 70px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 5px 14px; margin-bottom: 22px;
+    }
+    .eyebrow .pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 0 0 var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
+      70% { box-shadow: 0 0 0 8px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+    h1 {
+      font-size: clamp(38px, 8vw, 68px); line-height: 1.05;
+      letter-spacing: -2px; font-weight: 800; margin-bottom: 20px;
+    }
+    h1 .grad {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lead { font-size: clamp(17px, 3vw, 20px); color: var(--muted); max-width: 560px; margin-bottom: 32px; }
+    .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 10px; font-size: 15px; font-weight: 600;
+      border: 1px solid var(--border); transition: transform .15s, border-color .15s, background .15s;
+    }
+    .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.ghost:hover { border-color: var(--accent); }
+
+    /* sections */
+    section { padding: 46px 0; }
+    .kicker {
+      font-size: 13px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 14px; font-weight: 600;
+    }
+    h2 { font-size: clamp(24px, 5vw, 32px); letter-spacing: -1px; margin-bottom: 20px; }
+    p.body { color: var(--muted); max-width: 620px; }
+
+    /* stack grid */
+    .stack { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 8px; }
+    .chip {
+      background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; font-size: 14px; display: flex; align-items: center; gap: 10px;
+      transition: border-color .15s, transform .15s;
+    }
+    .chip:hover { border-color: var(--accent-2); transform: translateY(-2px); }
+    .chip b { font-weight: 600; }
+    .chip span { color: var(--muted); font-size: 12px; margin-left: auto; }
+
+    /* projects */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px; transition: border-color .15s, transform .15s;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card h3 { font-size: 18px; display: flex; align-items: center; justify-content: space-between; }
+    .card h3 .arrow { color: var(--muted); transition: transform .15s; }
+    .card:hover h3 .arrow { transform: translate(3px, -3px); color: var(--accent); }
+    .card p { color: var(--muted); font-size: 14px; flex: 1; }
+    .card .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .card .tags span { font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; }
+
+    /* contact */
+    .contact-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
+
+    footer { border-top: 1px solid var(--border); padding: 30px 0; color: var(--muted); font-size: 13px; text-align: center; }
+
+    /* reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s, transform .6s; }
+    .reveal.in { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <nav>
+    <div class="wrap">
+      <div class="logo">zen<span class="dot">.</span></div>
+      <div class="links">
+        <a href="#stack">Stack</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <div class="eyebrow"><span class="pulse"></span> Available for work</div>
+      <h1>Full-stack developer<br />building <span class="grad">end to end</span>.</h1>
+      <p class="lead">I design, ship, and run web apps — from database schema to pixel-perfect UI. Comfortable across the whole stack.</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">View work</a>
+        <a class="btn ghost" href="#contact">Get in touch →</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="reveal">
+    <div class="wrap">
+      <div class="kicker">About</div>
+      <h2>Hi, I'm Zen.</h2>
+      <p class="body">A full-stack developer who likes owning problems from front to back. I build with modern JavaScript/TypeScript on the frontend, solid APIs and databases on the backend, and I care about the parts most people skip — deploys, monitoring, and clean, maintainable code.</p>
+    </div>
+  </section>
+
+  <section id="stack" class="reveal">
+    <div class="wrap">
+      <div class="kicker">Toolbox</div>
+      <h2>Tech I work with</h2>
+      <div class="stack">
+        <div class="chip"><b>React</b><span>UI</span></div>
+        <div class="chip"><b>TypeScript</b><span>lang</span></div>
+        <div class="chip"><b>Node.js</b><span>API</span></div>
+        <div class="chip"><b>Java</b><span>backend</span></div>
+        <div class="chip"><b>Go</b><span>services</span></div>
+        <div class="chip"><b>PostgreSQL</b><span>data</span></div>
+        <div class="chip"><b>Tailwind</b><span>style</span></div>
+        <div class="chip"><b>Docker</b><span>ship</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="reveal">
+    <div class="wrap">
+      <div class="kicker">Selected work</div>
+      <h2>Things I've built</h2>
+      <div class="cards">
+        <a class="card" href="#contact">
+          <h3>Project One <span class="arrow">↗</span></h3>
+          <p>A short line about what it does and the problem it solves. Swap this for a real project.</p>
+          <div class="tags"><span>React</span><span>Node</span><span>Postgres</span></div>
+        </a>
+        <a class="card" href="#contact">
+          <h3>Project Two <span class="arrow">↗</span></h3>
+          <p>Another build worth showing. Describe the impact — users, speed, scale.</p>
+          <div class="tags"><span>Go</span><span>Docker</span></div>
+        </a>
+        <a class="card" href="#contact">
+          <h3>Project Three <span class="arrow">↗</span></h3>
+          <p>A side project or tool. Link it to a live demo or GitHub repo.</p>
+          <div class="tags"><span>TypeScript</span><span>API</span></div>
+        </a>
+        <a class="card" href="#contact">
+          <h3>Project Four <span class="arrow">↗</span></h3>
+          <p>Round out the grid with one more. Keep descriptions tight and outcome-focused.</p>
+          <div class="tags"><span>Java</span><span>REST</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <div class="wrap">
+      <div class="kicker">Contact</div>
+      <h2>Let's work together</h2>
+      <p class="body">Got a project or a role in mind? I'm open to freelance and full-time. Reach out — I reply fast.</p>
+      <div class="contact-row">
+        <a class="btn primary" href="mailto:zhaoxian0928@gmail.com">Email me</a>
+        <a class="btn ghost" href="https://github.com/zhaoxian0928" target="_blank" rel="noopener">GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© <span id="yr"></span> Zen · Built with plain HTML/CSS · zen.is-a.dev</div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
